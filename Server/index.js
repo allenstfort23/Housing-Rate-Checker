@@ -46,7 +46,7 @@ app.post("/api/refresh", (req, res) => {
 })
 
 const generateAccessToken = (user) => {
-     return jwt.sign({ id: user.id, isAdmin: user.isAdmin }, "mySecretAwesomeKey", {expiresIn: "15m"});
+     return jwt.sign({ id: user.id, isAdmin: user.isAdmin }, "mySecretAwesomeKey", {expiresIn: "30s"});
 }
 const generateRefreshToken = (user) => {
    return jwt.sign({ id: user.id, isAdmin: user.isAdmin }, "mySecretAwesomeRefreshKey");
