@@ -24,7 +24,7 @@ function NavBar() {
     const toggleShow = () => setShow((s) => !s);
 
     return (
-        <Navbar collapseOnSelect expand="lg" bg="light" variant="light">
+        <Navbar collapseOnSelect expand="lg" bg="light" variant="light" sticky="top">
             <Container fluid>
                 <Navbar.Brand href="/">Housing Checker</Navbar.Brand>
                 <Navbar.Toggle aria-controls="responsive-navbar-nav" />
