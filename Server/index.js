@@ -18,25 +18,57 @@ const users = [
     }
 ]
 
+let refreshTokens = [];
+
 app.post("/api/refresh", (req, res) => {
     //take the refresh token from user
+    const refreshToken = req.body.token
 
     //send error if there is no token or i's invalida
+    if(!refreshToken) return res.status(401).json("You are not authenticated");
+    if(!refreshToken.includes(refreshToken)) {
+        return res.status(403).json("Refresh token is not valid")
+    }
+    jwt.verify(refreshToken, "mySecretAwesomeRefreshKey",(err,user) => {
+        err && console.log(err);
+        refreshTokens = refreshToken.filter(token => token !== refreshToken);
 
-    //create new token, refresh token
+        const newAccessToken = generateAccessToken(user);
+        const newRefreshToken = generateRefreshToken(user);
+
+        refreshTokens.push(newRefreshToken);
+
+        res.status(200).json({
+            accessToken: newAccessToken,
+            refreshToken: newRefreshToken,
+        });
+    });
 })
+
+const generateAccessToken = (user) => {
+     return jwt.sign({ id: user.id, isAdmin: user.isAdmin }, "mySecretAwesomeKey", {expiresIn: "15m"});
+}
+const generateRefreshToken = (user) => {
+   return jwt.sign({ id: user.id, isAdmin: user.isAdmin }, "mySecretAwesomeRefreshKey");
+}
+
 app.post("/api/login", (req, res) => {
     const { username, password } = req.body;
     const user = users.find((u) => {
         return u.username === username && u.password === password;
     });
+
     if (user) {
         // Generate an access token
-        const accessToken = jwt.sign({ id: user.id, isAdmin: user.isAdmin }, "mySecretAwesomeKey", {expiresIn: "15m"});
+        const accessToken = generateAccessToken(user);
+        const refreshToken = generateRefreshToken(user);
+        refreshTokens.push(refreshToken);
+
         res.json({
             username: user.username,
             isAdmin: user.isAdmin,
-            accessToken
+            accessToken,
+            refreshToken
         });
     } else {
         res.status(400).json("Invaild Username or password");
