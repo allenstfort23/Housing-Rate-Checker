@@ -8,13 +8,13 @@ function Home() {
     return (
         <div className="container py-5">
             <div className="container-fluid py-5">
-                <div class="p-5 mb-4 bg-light rounded-1">
+                <div class="p-5 mb-4 bg-light rounded">
                     <h1 className="display-5 fw-bold">Housing Checker</h1>
                     <p className="col-md-12 fs-4">This is a simple hero unit, a simple jumbotron-style component for calling extra attention to featured content or information.</p>
-                    <p>It uses utility classNamees for typography and spacing to space content out within the larger container.</p>
+                    <p>It uses utility classNames for typography and spacing to space content out within the larger container.</p>
                     {/* Working on fixing spline object */}
 
-                    <button class="btn btn-primary btn-lg" type="button">Example button</button>
+                    <button class="btn btn-primary btn-lg" type="button">Learn More</button>
                 </div>
             </div>
             <div className="row g-4 text-center">
