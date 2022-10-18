@@ -8,6 +8,7 @@ import Form from 'react-bootstrap/Form';
 import Container from 'react-bootstrap/Container';
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
+import "../stylesheets/Navbar.css"
 
 
 function NavBar() {
@@ -26,20 +27,19 @@ function NavBar() {
     return (
         <Navbar collapseOnSelect expand="lg" bg="light" variant="light" sticky="top">
             <Container fluid>
-                <Navbar.Brand href="/">Housing Checker</Navbar.Brand>
+                <Navbar.Brand className="link-style" href="/">Housing Checker</Navbar.Brand>
                 <Navbar.Toggle aria-controls="responsive-navbar-nav" />
                 <Navbar.Collapse id="responsive-navbar-nav">
                     <Nav className="me-auto">
-                        <Nav.Link href="/">Home</Nav.Link>
-                        <Nav.Link href="/features">Features</Nav.Link>
-                        <Nav.Link href="#pricing">Pricing</Nav.Link>
+                        <Nav.Link className="link-style" href="/">Home</Nav.Link>
+                        <Nav.Link className="link-style" href="/features">Features</Nav.Link>
                     </Nav>
                     <Nav>
                         <OverlayTrigger
                             placement="left"
                             delay={{ show: 200, hide: 400 }}
                             overlay={renderTooltip}>
-                            <Button variant="outline-primary" onClick={toggleShow} classNameName="me-2" size="sm">
+                            <Button  variant="outline-primary" onClick={toggleShow} className="me-2" size="sm">
                                 Signup/Login
                             </Button>
                         </OverlayTrigger>
